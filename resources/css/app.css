@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        @apply transition-colors duration-300 ease-out;
+    }
+}
+
+@media print {
+    .print\:hidden,
+    .manager-sidebar,
+    aside.manager-sidebar {
+        display: none !important;
+    }
+
+    main {
+        width: 100% !important;
+        max-width: 100% !important;
+        background: white !important;
+    }
+
+    body {
+        background: white !important;
+    }
+
+    #laporan-print-area {
+        border: none !important;
+        box-shadow: none !important;
+    }
+}
+
+/* Google Translate Widget Styling Overrides */
+/* Hide the top notification/banner bar that covers the header */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-banner-frame,
+iframe.goog-te-banner-frame,
+.skiptranslate iframe,
+#goog-gt-tt,
+.goog-te-balloon-frame,
+div#goog-gt-tt {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
+}
+
+/* Prevent Google Translate from pushing body down with inline top style */
+body {
+    top: 0 !important;
+    position: static !important;
+}
+
+/* Also prevent displacement on html element */
+html.translated-ltr,
+html.translated-rtl {
+    overflow: visible !important;
+}
+html.translated-ltr body,
+html.translated-rtl body {
+    top: 0 !important;
+}
+
+.goog-te-gadget {
+    color: transparent !important;
+    font-size: 0 !important;
+    display: flex;
+    align-items: center;
+}
+.goog-te-gadget .goog-te-combo {
+    color: #334155;
+    background-color: transparent;
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    cursor: pointer;
+}
+.dark .goog-te-gadget .goog-te-combo {
+    color: #f1f5f9;
+}
+.goog-logo-link {
+    display: none !important;
+}
+.goog-te-gadget .goog-te-combo:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
