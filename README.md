@@ -69,7 +69,7 @@ The application is a **Single Page Application (SPA)** with a hybrid architectur
 | Communication | REST API | Laravel ↔ FastAPI |
 | Database | MySQL | Stores system data and forecast results |
 
-![System Architecture](docs/images/architecture.png)
+![System Architecture](architecture.png)
 
 ### How a forecast runs
 1. The Admin enters sales data manually or uploads a CSV file.
@@ -82,7 +82,7 @@ The application is a **Single Page Application (SPA)** with a hybrid architectur
 
 ## 👥 Use Case Diagram
 
-![Use Case Diagram](docs/images/use-case.png)
+![Use Case Diagram](use-case.png)
 
 ## 🚀 Getting Started
 
