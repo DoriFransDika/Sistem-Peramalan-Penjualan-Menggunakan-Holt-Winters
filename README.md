@@ -1,59 +1,140 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<div align="center">
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# ☕ Coffee Bean Sales & Stock Forecasting System
 
-## About Laravel
+**A full-stack web application that forecasts coffee bean sales to help a company plan its warehouse stock, built with the Holt-Winters method.**
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+![Laravel](https://img.shields.io/badge/Laravel_12-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+![React](https://img.shields.io/badge/React.js-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Inertia.js](https://img.shields.io/badge/Inertia.js-9553E9?style=for-the-badge&logo=inertia&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+*Final-year thesis project · Informatics Engineering, Institut Teknologi Padang*
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+</div>
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## 📌 Overview
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+This system was built to solve a real problem found at a coffee bean company in Kerinci: the company struggled to plan its stock purchases and warehouse inventory.
 
-## Laravel Sponsors
+Coffee beans are a sensitive product because they easily absorb the temperature and humidity around them, so stock level mistakes are costly in both directions:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- **Sales suddenly drop** → unsold stock piles up in the warehouse → bean quality declines.
+- **Sales suddenly rise** → the company is overwhelmed finding suppliers and extra coffee to meet demand.
 
-### Premium Partners
+To address this, the system forecasts future sales per coffee category so the company can prepare its stock earlier and more accurately.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 🎯 Results
 
-## Contributing
+| Metric | Result |
+|---|---|
+| Forecast horizon | 6 months ahead |
+| Coffee categories | 3 |
+| Average MAPE | **below 20%** (rated *Good*) |
+| Data | Real sales data from the company, fluctuating and with a long forecast horizon |
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 🧠 Why Holt-Winters?
 
-## Code of Conduct
+The system uses **Holt-Winters exponential smoothing**, a classic time-series forecasting method built on pure mathematical techniques. It was chosen because the historical data available at the company is limited, and the method works well on data with level, trend, and seasonal patterns.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## ✨ Features
 
-## Security Vulnerabilities
+**Admin**
+- Secure login with role validation
+- Manage sales data: add, edit, delete, and bulk upload through CSV
+- Run forecasts with manual or automatic parameters, and save the results
+- View the admin dashboard and forecast results
+- User management
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+**Manager**
+- Secure login with role validation
+- View the manager dashboard
+- View forecast results
+- View and print reports
 
-## License
+## 🏗️ System Architecture
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The application is a **Single Page Application (SPA)** with a hybrid architecture. Laravel handles the main application logic, and a separate FastAPI service acts as the dedicated forecasting engine.
+
+| Layer | Technology | Role |
+|---|---|---|
+| Frontend | React.js | User interface |
+| Bridge | Inertia.js | Connects React to Laravel as an SPA |
+| Backend | Laravel 12 (with Breeze) | Authentication, sales data management, reports, role-based access |
+| Forecasting engine | FastAPI (Python) | Data preprocessing, Holt-Winters model, prediction output (forecast, MAPE, trend) |
+| Communication | REST API | Laravel ↔ FastAPI |
+| Database | MySQL | Stores system data and forecast results |
+
+![System Architecture](docs/images/architecture.png)
+
+### How a forecast runs
+1. The Admin enters sales data manually or uploads a CSV file.
+2. Laravel stores the data in MySQL.
+3. The Admin runs a forecast, choosing manual or automatic parameters.
+4. Laravel sends the request to the FastAPI service through the REST API.
+5. FastAPI cleans and validates the data, applies the Holt-Winters model, and returns the forecast along with its accuracy (MAPE) and trend.
+6. The forecast result is saved to the database.
+7. The Manager views the results on the dashboard and in printable reports.
+
+## 👥 Use Case Diagram
+
+![Use Case Diagram](docs/images/use-case.png)
+
+## 🚀 Getting Started
+
+### Prerequisites
+- PHP 8.2+ and Composer
+- Node.js and npm
+- Python 3.10+
+- MySQL
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/DoriFransDika/Sistem-Peramalan-Penjualan-Menggunakan-Holt-Winters.git
+cd Sistem-Peramalan-Penjualan-Menggunakan-Holt-Winters
+```
+
+### 2. Set up the Laravel application
+```bash
+composer install
+npm install
+cp .env.example .env
+php artisan key:generate
+```
+Edit `.env` with your own database credentials and the URL of the forecasting service, then run:
+```bash
+php artisan migrate --seed
+npm run dev
+php artisan serve
+```
+
+### 3. Set up the FastAPI forecasting service
+```bash
+cd <forecasting-service-folder>
+python -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn main:app --reload --port 8001
+```
+
+> Replace the folder name and the `uvicorn` entry point with the ones used in this repository.
+
+## 📁 Project Structure
+
+```
+├── app/ routes/ resources/ ...   # Laravel + React (Inertia) application
+├── <forecasting-service>/        # FastAPI forecasting engine
+├── docs/images/                  # Architecture and use case diagrams
+└── README.md
+```
+
+## 👤 Author
+
+**Dori Frans Dika**
+Informatics Engineering graduate, Institut Teknologi Padang
+
+[LinkedIn](https://linkedin.com/in/dori-frans-dika) · [GitHub](https://github.com/DoriFransDika) · [Portfolio](https://my-portfolio-alpha-nine-51.vercel.app/) · dorifransdikaa@gmail.com
